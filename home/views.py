@@ -4,13 +4,11 @@ from django.shortcuts import render
 from django .http import HttpResponse
 
 def index(request):
-    return HttpResponse('A view index funcionou, Wow!')
+    return render(request,'index.html')
 
 def sobre(request):
-    return HttpResponse('<h1>Sistema 1.0 desenvolvido por mesmo<h1>')
-
+    return render(request,'sobre.html')
 def contato(request):
-    return HttpResponse('<h1>Esta é a página de contato<h1>')
-
+    return render(request,'contato.html')
 def ajuda(request):
-    return HttpResponse('<h1>Esta é a página de ajuda<h1>')
+    return render(request,'ajuda.html') 
