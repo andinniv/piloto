@@ -16,6 +16,8 @@ def exibir_item(request,id):
     return render(request,'exibir_item.html',{'id':id})
 def perfil(request,usuario):
     return render(request, 'perfil.html', {'usuario': usuario})
+def cadweb(request):
+    return render(request,'cadweb.html',)
 def dia_da_semana(request, numero):
     dias = {
         1: 'Segunda-feira',
