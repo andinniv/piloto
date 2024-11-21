@@ -11,55 +11,44 @@
             font-family: 'Arial', sans-serif;
             background-color: #f4f6f9;
         }
-        /* Estilos para a sidebar e conteúdo */
         .sidebar {
-            position: fixed; /* Fixa a sidebar ao lado */
-            top: 0;
+            height: 100vh;
+            position: fixed;
             left: 0;
-            width: 250px; /* Ajuste conforme necessário */
-            height: 100%;
+            top: 0;
+            bottom: 0;
+            width: 250px;
             background-color: #343a40;
-            z-index: 1050; /* Garante que a sidebar fique acima do conteúdo */
-            transition: transform 0.3s ease-in-out;
+            padding-top: 20px;
+            transition: all 0.3s;
         }
-
-        #content {
-            transition: margin-left 0.3s ease-in-out;
-        }
-
-        /* Quando a sidebar estiver escondida, ajustamos o conteúdo */
         .sidebar.active {
-            transform: translateX(-250px); /* Esconde a sidebar */
+            width: 80px;
         }
-
-        #content.active {
-            margin-left: 0;
-        }
-
-        /* Estilos para garantir que o conteúdo não sobreponha a sidebar */
-        body {
-            overflow-x: hidden;
-        }
-
         .sidebar .nav-link {
-        color: #c2c7d0;
-        padding: 10px 20px;
-        font-size: 16px;
+            color: #c2c7d0;
+            padding: 10px 20px;
+            font-size: 16px;
         }
-        .sidebar.active .nav-link {
-        pointer-events: none; /* Ícones ficam inacessíveis */
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+        .sidebar .nav-link .fas {
+            margin-right: 10px;
+        }
+        .sidebar.active .nav-link .fas {
+            margin-right: 0;
+        }
+        .sidebar.active .nav-link span {
+            display: none;
         }
         .content {
-        margin-left: 250px;
-        transition: margin-left 0.3s ease-in-out;
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
         }
         .content.active {
-        margin-left: 0;
-        }
-        @media (max-width: 768px) {
-        .content {
-            margin-left: 0;
-        }
+            margin-left: 80px;
         }
         .navbar {
             background-color: #3c8dbc;
@@ -123,6 +112,7 @@
             </div>
         </nav>
 
+        <!-- Dashboard Content -->
         <div class="container-fluid mt-4">
             
             {% block cards %}
@@ -183,6 +173,10 @@
                     </div>
                 </div>
             </div>
+            
+
+			
+            <!-- Additional content like charts, tables, etc. can be added here -->
         </div>
     </div>
 
@@ -190,27 +184,13 @@
     <script>
         // Sidebar toggle
         document.getElementById('toggle-sidebar').addEventListener('click', function () {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
-            
-            sidebar.classList.toggle('active');
-            content.classList.toggle('active');
-            
-            // Ajuste de z-index para garantir que a sidebar fique acima do conteúdo
-            if (sidebar.classList.contains('active')) {
-                sidebar.style.zIndex = '1050';
-                content.style.zIndex = '1';
-            } else {
-                sidebar.style.zIndex = '1';
-                content.style.zIndex = '1050';
-            }
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('content').classList.toggle('active');
         });
-    
+
         // Submenu toggle
         document.querySelectorAll('.nav-item').forEach(function (item) {
-            item.addEventListener('click', function (e) {
-                e.stopPropagation(); // Evita que o clique feche outros menus ao clicar no submenu
-                
+            item.addEventListener('click', function () {
                 if (this.classList.contains('open')) {
                     this.classList.remove('open');
                 } else {
@@ -222,33 +202,6 @@
                 }
             });
         });
-    
-        // Adiciona comportamento de clique na própria sidebar para reexibi-la quando escondida
-        const sidebar = document.getElementById('sidebar');
-        sidebar.addEventListener('click', function () {
-            if (sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                document.getElementById('content').classList.remove('active');
-            }
-        });
-    
-        // Garantir que ícones e links não sejam interativos enquanto o menu está escondido
-        const observer = new MutationObserver(() => {
-            if (sidebar.classList.contains('active')) {
-                sidebar.querySelectorAll('.nav-link').forEach(link => {
-                    link.style.pointerEvents = 'none';
-                });
-            } else {
-                sidebar.querySelectorAll('.nav-link').forEach(link => {
-                    link.style.pointerEvents = 'auto';
-                });
-            }
-        });
-    
-        // Observar mudanças de classe na sidebar
-        observer.observe(sidebar, { attributes: true, attributeFilter: ['class'] });
     </script>
-    
-
 </body>
 </html>
