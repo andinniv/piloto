@@ -26,4 +26,5 @@ urlpatterns = [
     path('perfil/<str:usuario>/', views.perfil, name='perfil'),
     path('dia/<int:numero>/', views.dia_da_semana, name='dia_da_semana'),
     path('produtos/', views.produtos, name="produtos"),
+    path('produtos/form/', views.form_produto, name="form_produto"),
 ]
