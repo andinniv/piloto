@@ -26,9 +26,9 @@
                 <td> {{item.id}}</td>
                 <td> {{item.nome}}</td>
                 <td>{{item.preco}}</td>
-                <td><button class=" btn btn-info">Detalhes</button>
-                    <button class=" btn btn-warning">Editar</button>
-                    <button class=" btn btn-danger">Excluir</button></td>
+                <td><a href="{% url 'detalhes_produto' item.id %}" class=" btn btn-info">Detalhes</a>
+                    <a href="{% url 'editar_produto' item.id %}" class=" btn btn-warning">Editar</a>                    
+                    <a href="{% url 'excluir_produto' item.id %}" class=" btn btn-danger">Excluir</a>
             </tr>
             {% endfor %}
           
