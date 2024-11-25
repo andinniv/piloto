@@ -2,6 +2,8 @@
 
 {% block titulo %} Produtos {% endblock %}
 
+{% block cards %}    {% endblock %}#3
+
 {% block titulo_page %} Listagem de Produtos {% endblock %}
 
 {% block conteudo %}
@@ -15,6 +17,7 @@
                 <th scope="col">Código</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Valor (R$)</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +26,9 @@
                 <td> {{item.id}}</td>
                 <td> {{item.nome}}</td>
                 <td>{{item.preco}}</td>
+                <td><button class=" btn btn-info">Detalhes</button>
+                    <button class=" btn btn-warning">Editar</button>
+                    <button class=" btn btn-danger">Excluir</button></td>
             </tr>
             {% endfor %}
           
