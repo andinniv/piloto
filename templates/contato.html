@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Contato
+{% endblock %}
+
+{% block cards %}    {% endblock %}
+
+{% block titulo_page %} Entre em contato! {% endblock %}
+
+
+{% block conteudo %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button  class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+{% endblock %}
